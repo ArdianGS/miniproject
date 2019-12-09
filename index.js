@@ -1,0 +1,36 @@
+const express = require('express');
+const app = express();
+const mongoose = require('mongoose');
+const router = require('./src/routes');
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
+const session = require('express-session');
+const viewRouter = require('./views/routes');
+
+app.use(express.json());
+app.use(cookieParser());
+app.use(session({
+  secret:'INI RAHASIA',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: true,
+    domain: '/'
+  }
+}))
+app.use(morgan('dev'))
+app.use('/api/v1', router);
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+app.use('/', viewRouter);
+
+mongoose.connect('mongodb://localhost/auth-training', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+  .then(data => {
+    app.listen(5000, () => console.log(`Listening on port 5000!\n\n\n\n`))
+  })
+  .catch(err => {
+    console.log('Failed to connect to database!')
+  })
