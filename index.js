@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const session = require('express-session');
 const viewRouter = require('./views/routes');
+const port = process.env.PORT || 8000;
 
 app.use(express.json());
 app.use(cookieParser());
@@ -24,7 +25,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use('/', viewRouter);
 
-mongoose.connect('mongodb://localhost/auth-training', {
+mongoose.connect(process.env.DB_CONNECTION, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
