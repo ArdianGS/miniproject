@@ -1,0 +1,7 @@
+create Project di gitlab
+push ke gitlab
+Mongo DB atlas =  pengganti mogo db di komp
+Heroku = software buat deploy (serverless)
+bkin nama web (latihan-blog)
+project gitlab, clone copy "clone with SSH"
+push diarahin ke hasil copy clone > git@gitlab.com:ArdianG/kepompong.git
